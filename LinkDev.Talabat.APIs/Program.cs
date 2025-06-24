@@ -1,4 +1,6 @@
 
+using LinkDev.Talabat.Infrastructure.Persistence;
+
 namespace LinkDev.Talabat.APIs
 {
     public class Program
@@ -16,6 +18,7 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddpersistenceService();
             #endregion
 
             var app = builder.Build();
