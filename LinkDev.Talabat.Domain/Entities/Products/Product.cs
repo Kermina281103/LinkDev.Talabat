@@ -9,10 +9,10 @@ namespace LinkDev.Talabat.Domain.Entities.Products
         public string? PicutreUrl { get; set; }
         public decimal Price  { get; set; }
 
-        public  int  CategoryId  { get; set; }//Foreign key for product category Entity
+        public  int?  CategoryId  { get; set; }//Foreign key for product category Entity
         public virtual  ProductCategory? Category { get; set; }
 
-        public  int  BrandId  { get; set; } //Foregin Key for ProductBrand Entity 
+        public  int?  BrandId  { get; set; } //Foregin Key for ProductBrand Entity 
         public virtual ProductBrand? Brand { get; set; }
 
     }

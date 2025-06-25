@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,13 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddpersistenceService(this IServiceCollection services)
+        public static IServiceCollection AddPersistenceService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<StoreDbContext>(optionBuilder =>
             {
-                optionBuilder.UseSqlServer("DefaultConnection");
-            } 
-               );
-
+                optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
             return services;
-
         }
     }
 }

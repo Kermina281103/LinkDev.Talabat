@@ -26,12 +26,12 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data.Config.Products
             builder.HasOne(product => product.Brand)
                 .WithMany()
                 .HasForeignKey(Product => Product.BrandId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(product => product.Category)
                 .WithMany()
                 .HasForeignKey(product => product.CategoryId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

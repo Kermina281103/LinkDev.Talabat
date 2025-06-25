@@ -1,11 +1,19 @@
 
 using LinkDev.Talabat.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.APIs
 {
     public class Program
     {
-        public static void Main(string[] args)
+
+
+        // [FromServices]
+        //public static StoreDbContext dbContext { get; set; } = null!;
+
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -17,27 +25,53 @@ namespace LinkDev.Talabat.APIs
             // builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddPersistenceService(builder.Configuration);
 
-            builder.Services.AddpersistenceService();
             #endregion
+            #region UpdateDatabase 
 
             var app = builder.Build();
 
-            #region Configure Kestrel MiddleWare 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                // app.MapOpenApi();
-                app.UseSwagger();
-                app.UseSwaggerUI();
-               
-            }
+            using var Scope = app.Services.CreateAsyncScope();
+            var Services = Scope.ServiceProvider;
+            var dbContext = Services.GetRequiredService<StoreDbContext>();
+            //Ask Runtime Env for an object from "storeDbContext" service Explicity 
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
-            app.Run();
+            var LoggerFactory = Services.GetRequiredService<ILoggerFactory>();
+
+            //Apply Migrations 
+            try
+            {
+                var PendingMigration = dbContext.Database.GetPendingMigrations();
+
+                if (PendingMigration.Any())
+                    await dbContext.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                var logger = LoggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error has been occured during apply the migraion");
+            }
             #endregion
+
+
+            #region Configure Kestrel MiddleWare 
+
+            {// Configure the HTTP request pipeline.
+                if (app.Environment.IsDevelopment())
+                {
+                    // app.MapOpenApi();
+                    app.UseSwagger();
+                    app.UseSwaggerUI();
+
+                }
+
+                app.UseHttpsRedirection();
+                app.UseAuthorization();
+                app.MapControllers();
+                app.Run();
+                #endregion
+            }
         }
     }
 }

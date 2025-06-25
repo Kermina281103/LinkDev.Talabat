@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LinkDev.Talabat.Infrastructure.Persistence.Data.Migrations
+namespace LinkDev.Talabat.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class ProductModuleMigrations : Migration
@@ -55,8 +55,8 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PicutreUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    BrandId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -70,13 +70,13 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
