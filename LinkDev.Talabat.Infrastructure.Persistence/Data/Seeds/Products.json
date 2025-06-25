@@ -1,0 +1,115 @@
+[
+
+    {
+        "Id": 0,
+        "Name": "iPhone 15 Pro",
+        "Description": "Latest flagship smartphone with advanced camera system",
+        "PicutreUrl": "https://example.com/images/iphone15pro.jpg",
+        "Price": 999.99,
+        "CategoryId": 1,
+        "BrandId": 1,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Samsung Galaxy S24",
+        "Description": "Premium Android smartphone with AI features",
+        "PicutreUrl": "https://example.com/images/galaxys24.jpg",
+        "Price": 849.99,
+        "CategoryId": 1,
+        "BrandId": 2,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Nike Air Max 270",
+        "Description": "Comfortable running shoes with air cushioning",
+        "PicutreUrl": "https://example.com/images/airmax270.jpg",
+        "Price": 129.99,
+        "CategoryId": 5,
+        "BrandId": 3,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Adidas Ultraboost 22",
+        "Description": "High-performance running shoes with boost technology",
+        "PicutreUrl": "https://example.com/images/ultraboost22.jpg",
+        "Price": 159.99,
+        "CategoryId": 5,
+        "BrandId": 4,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Sony WH-1000XM5",
+        "Description": "Wireless noise-canceling headphones",
+        "PicutreUrl": "https://example.com/images/sonywh1000xm5.jpg",
+        "Price": 349.99,
+        "CategoryId": 1,
+        "BrandId": 5,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Levi's 501 Original Jeans",
+        "Description": "Classic straight-fit denim jeans",
+        "PicutreUrl": "https://example.com/images/levis501.jpg",
+        "Price": 89.99,
+        "CategoryId": 2,
+        "BrandId": 6,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+
+    {
+        "Id": 0,
+        "Name": "The Psychology of Programming",
+        "Description": "Classic book on software development psychology",
+        "PicutreUrl": "https://example.com/images/psychprog.jpg",
+        "Price": 24.99,
+        "CategoryId": 3,
+        "BrandId": 7,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "IKEA MALM Bed Frame",
+        "Description": "Modern wooden bed frame with clean lines",
+        "PicutreUrl": "https://example.com/images/malmbed.jpg",
+        "Price": 179.99,
+        "CategoryId": 4,
+        "BrandId": 8,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Apple MacBook Pro 14\"",
+        "Description": "Professional laptop with M3 chip and Retina display",
+        "PicutreUrl": "https://example.com/images/macbookpro14.jpg",
+        "Price": 1999.99,
+        "CategoryId": 1,
+        "BrandId": 1,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Nike Dri-FIT T-Shirt",
+        "Description": "Moisture-wicking athletic t-shirt",
+        "PicutreUrl": "https://example.com/images/nikedrifit.jpg",
+        "Price": 29.99,
+        "CategoryId": 2,
+        "BrandId": 3,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+    
+]
