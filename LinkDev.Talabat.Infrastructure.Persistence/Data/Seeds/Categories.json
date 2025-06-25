@@ -1,0 +1,33 @@
+[
+    {
+        "Id": 0,
+        "Name": "Electronics",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Clothing",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Books",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Home & Garden",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Sports & Outdoors",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+]
+  

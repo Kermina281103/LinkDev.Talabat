@@ -1,5 +1,6 @@
 
 using LinkDev.Talabat.Infrastructure.Persistence;
+using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -28,9 +29,11 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddPersistenceService(builder.Configuration);
 
             #endregion
-            #region UpdateDatabase 
 
             var app = builder.Build();
+
+            #region UpdateDatabase and DataSeeding 
+
 
             using var Scope = app.Services.CreateAsyncScope();
             var Services = Scope.ServiceProvider;
@@ -46,11 +49,13 @@ namespace LinkDev.Talabat.APIs
 
                 if (PendingMigration.Any())
                     await dbContext.Database.MigrateAsync();
+
+                await StoreContextSeeds.SeedAsync(dbContext);
             }
             catch (Exception ex)
             {
                 var logger = LoggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An error has been occured during apply the migraion");
+                logger.LogError(ex, "An error has been occured during apply the migraion or the Data Seeding ");
             }
             #endregion
 
@@ -69,8 +74,9 @@ namespace LinkDev.Talabat.APIs
                 app.UseHttpsRedirection();
                 app.UseAuthorization();
                 app.MapControllers();
-                app.Run();
                 #endregion
+
+                app.Run();
             }
         }
     }

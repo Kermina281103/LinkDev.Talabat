@@ -1,0 +1,51 @@
+[
+    {
+        "Id": 0,
+        "Name": "Apple",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+
+    },
+    {
+        "Id": 0,
+        "Name": "Samsung",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Nike",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Adidas",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Sony",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Levi's",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Penguin Random House",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "IKEA",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+]
