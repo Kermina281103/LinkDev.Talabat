@@ -1,4 +1,6 @@
-﻿using LinkDev.Talabat.Domain.Entities.Products;
+﻿using LinkDev.Talabat.Domain.Contract;
+using LinkDev.Talabat.Domain.Entities.Products;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,26 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Persistence.Data
 {
-    public static class StoreContextSeeds
+    public class StoreContextInitializer(StoreDbContext _dbContext) : IStoreContextInitializer
     {
-        public static async  Task SeedAsync(StoreDbContext dbContext)
+        
+        public async Task InitializeAsync()
         {
-            if (!dbContext.Brands.Any())
+            var PendingMigration = await _dbContext.Database.GetPendingMigrationsAsync();
+
+            if (PendingMigration.Any())
+                await _dbContext.Database.MigrateAsync();
+        }
+
+        public async Task SeedAsync()
+        {
+            if (!_dbContext.Brands.Any())
             {
 
                 var brandData = await File.ReadAllTextAsync("../LinkDev.Talabat.Infrastructure.Persistence/Data/Seeds/Brands.json");
 
                 var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
-                    
+
 
                 if (brands?.Count > 0)
                 {
@@ -28,13 +39,13 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data
                     ///
                     /// }
                     /// 
-                    await dbContext.Set<ProductBrand>().AddRangeAsync(brands);
-                     await dbContext.SaveChangesAsync();
+                    await _dbContext.Set<ProductBrand>().AddRangeAsync(brands);
+                    await _dbContext.SaveChangesAsync();
                 }
             }
 
 
-            if (!dbContext.Categories.Any())
+            if (!_dbContext.Categories.Any())
             {
 
                 var categoryData = await File.ReadAllTextAsync("../LinkDev.Talabat.Infrastructure.Persistence/Data/Seeds/Categories.json");
@@ -50,13 +61,13 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data
                     ///
                     /// }
                     /// 
-                    await dbContext.Set<ProductCategory>().AddRangeAsync(Categories);
-                    await dbContext.SaveChangesAsync();
-                }
+                    await _dbContext.Set<ProductCategory>().AddRangeAsync(Categories);
+                    await _dbContext.SaveChangesAsync();
+                }         
             }
 
 
-            if (!dbContext.Products.Any())
+            if (!_dbContext.Products.Any())
             {
 
                 var ProductData = await File.ReadAllTextAsync("../LinkDev.Talabat.Infrastructure.Persistence/Data/Seeds/Products.json");
@@ -72,8 +83,8 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data
                     ///
                     /// }
                     /// 
-                    await dbContext.Set<Product>().AddRangeAsync(products);
-                    await dbContext.SaveChangesAsync();
+                    await _dbContext.Set<Product>().AddRangeAsync(products);
+                    await _dbContext.SaveChangesAsync();
                 }
             }
         }

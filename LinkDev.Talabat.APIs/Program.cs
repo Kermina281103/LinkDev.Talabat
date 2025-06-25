@@ -1,4 +1,5 @@
 
+using LinkDev.Talabat.APIs.Extensions;
 using LinkDev.Talabat.Infrastructure.Persistence;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -32,31 +33,8 @@ namespace LinkDev.Talabat.APIs
 
             var app = builder.Build();
 
-            #region UpdateDatabase and DataSeeding 
-
-
-            using var Scope = app.Services.CreateAsyncScope();
-            var Services = Scope.ServiceProvider;
-            var dbContext = Services.GetRequiredService<StoreDbContext>();
-            //Ask Runtime Env for an object from "storeDbContext" service Explicity 
-
-            var LoggerFactory = Services.GetRequiredService<ILoggerFactory>();
-
-            //Apply Migrations 
-            try
-            {
-                var PendingMigration = dbContext.Database.GetPendingMigrations();
-
-                if (PendingMigration.Any())
-                    await dbContext.Database.MigrateAsync();
-
-                await StoreContextSeeds.SeedAsync(dbContext);
-            }
-            catch (Exception ex)
-            {
-                var logger = LoggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An error has been occured during apply the migraion or the Data Seeding ");
-            }
+            #region DataBase Initialzation 
+            await app.InitializeStoreContextAsync();
             #endregion
 
 
