@@ -14,4 +14,8 @@
     <ProjectReference Include="..\LinkDev.Talabat.Domain\LinkDev.Talabat.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Images\Products\" />
+  </ItemGroup>
+
 </Project>

@@ -19,6 +19,7 @@ namespace LinkDev.Talabat.Application.Mapping
                 .ForMember(d => d.Category, O => O.MapFrom(src => src.Category!.Name));
 
             CreateMap<ProductBrand, BrandDto>();
+            CreateMap<ProductCategory, CategoryDto>();
         }
     }
 }
