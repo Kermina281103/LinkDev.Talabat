@@ -1,6 +1,7 @@
 ﻿
 using LinkDev.Talabat.Domain.Contract;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
+using LinkDev.Talabat.Infrastructure.Persistence.UnitOfWorks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
@@ -20,7 +21,8 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
                 optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<IStoreContextInitializer, StoreContextInitializer>();
-
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            
             return services;
         }
     }

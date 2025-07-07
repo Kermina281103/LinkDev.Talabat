@@ -16,6 +16,7 @@ namespace LinkDev.Talabat.Application
             //services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+           
             return services;
         }
     }

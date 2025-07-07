@@ -4,7 +4,7 @@ using LinkDev.Talabat.Infrastructure.Persistence.Repositories;
 using System.Collections.Concurrent;
 
 
-namespace LinkDev.Talabat.Infrastructure.Persistence.UnitOfWork
+namespace LinkDev.Talabat.Infrastructure.Persistence.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
