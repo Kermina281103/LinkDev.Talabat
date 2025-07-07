@@ -28,7 +28,7 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddPersistenceService(builder.Configuration);
-
+            
             #endregion
 
             var app = builder.Build();
@@ -50,6 +50,7 @@ namespace LinkDev.Talabat.APIs
                 }
 
                 app.UseHttpsRedirection();
+                app.UseStaticFiles();
                 app.UseAuthorization();
                 app.MapControllers();
                 #endregion

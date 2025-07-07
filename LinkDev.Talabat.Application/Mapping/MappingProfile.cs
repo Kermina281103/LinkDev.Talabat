@@ -12,12 +12,14 @@ namespace LinkDev.Talabat.Application.Mapping
 {
     public class MappingProfile:Profile
     {
+        
         public MappingProfile()
         {
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(d => d.Brand, o => o.MapFrom(src => src.Brand!.Name))
-                .ForMember(d => d.Category, O => O.MapFrom(src => src.Category!.Name));
-
+                .ForMember(d => d.Category, O => O.MapFrom(src => src.Category!.Name))
+                //.ForMember(d=>d.PictureUrl,O=>O.MapFrom(s=>$"{"https://localhost:7097"}{s.PicutreUrl}");
+                .ForMember(d => d.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductCategory, CategoryDto>();
         }
