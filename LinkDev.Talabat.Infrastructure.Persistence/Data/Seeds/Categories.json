@@ -1,33 +1,20 @@
 [
     {
         "Id": 0,
-        "Name": "Electronics",
+        "Name": "Beverages",
         "CreatedBy": "1",
         "LastModifiedBy": "1"
     },
     {
         "Id": 0,
-        "Name": "Clothing",
+        "Name": "Food",
         "CreatedBy": "1",
         "LastModifiedBy": "1"
     },
     {
         "Id": 0,
-        "Name": "Books",
-        "CreatedBy": "1",
-        "LastModifiedBy": "1"
-    },
-    {
-        "Id": 0,
-        "Name": "Home & Garden",
-        "CreatedBy": "1",
-        "LastModifiedBy": "1"
-    },
-    {
-        "Id": 0,
-        "Name": "Sports & Outdoors",
+        "Name": "Desserts",
         "CreatedBy": "1",
         "LastModifiedBy": "1"
     }
 ]
-  
