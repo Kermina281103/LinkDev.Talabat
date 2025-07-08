@@ -5,6 +5,7 @@ using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using LinkDev.Talabat.Application;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -29,6 +30,7 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddPersistenceService(builder.Configuration);
+            builder.Services.AddApplicationServices();
             
             #endregion
 
