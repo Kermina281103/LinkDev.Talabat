@@ -1,4 +1,5 @@
 ﻿using LinkDev.Talabat.Domain.Contract;
+using LinkDev.Talabat.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,12 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories
        
         public async Task<IEnumerable<TEntity>> GetAllAsync(bool withTracking = false)
         {
-            if (withTracking) return await _dbContext.Set<TEntity>().ToListAsync();
+            if (typeof(TEntity) == typeof(Product))
+                return withTracking ? (IEnumerable<TEntity>)await _dbContext.Set<Product>().Include(P => P.Brand).Include(P => P.Category).ToListAsync()
+                : (IEnumerable<TEntity>)await _dbContext.Set<Product>().Include(P => P.Brand).Include(P => P.Category).AsNoTracking().ToListAsync();
 
-            return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
+                return withTracking ? await _dbContext.Set<TEntity>().ToListAsync()
+                    : await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
         }
         public async Task<TEntity?> GetAsync(TKey id)
         => await _dbContext.Set<TEntity>().FindAsync(id);
