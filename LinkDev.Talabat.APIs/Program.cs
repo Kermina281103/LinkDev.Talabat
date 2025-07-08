@@ -21,8 +21,9 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Services 
             // Add services to the container.
-            builder.Services.AddControllers();
-
+            builder.Services.AddControllers()
+                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+            
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             // builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
