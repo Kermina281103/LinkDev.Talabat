@@ -29,17 +29,17 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Products
                 return NotFound(new { StatusCode = 404, message = "Not found." });
             return Ok(product);
         }
-        [HttpGet("brands")]
 
+        [HttpGet("brands")]
         public async Task<ActionResult<BrandDto>> GetBrands()
         {
             var brands = await serviceManager.ProductService.GetBrandsAsync();
             return Ok(brands);
         }
         
-        [HttpGet("categories")]
 
-        public async Task<ActionResult<BrandDto>> GetCategories()
+        [HttpGet("categories")]
+        public async Task<ActionResult<CategoryDto>> GetCategories()
         {
             var categorires = await serviceManager.ProductService.GetCategoriesAsync();
             return Ok(categorires);
