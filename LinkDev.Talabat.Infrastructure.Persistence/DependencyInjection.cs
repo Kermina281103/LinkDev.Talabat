@@ -1,5 +1,4 @@
-﻿
-using LinkDev.Talabat.Domain.Contract;
+﻿using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using LinkDev.Talabat.Infrastructure.Persistence.UnitOfWorks;
 using Microsoft.Extensions.Configuration;
