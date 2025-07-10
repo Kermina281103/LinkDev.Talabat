@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using LinkDev.Talabat.Application.Abstraction.Services;
+using LinkDev.Talabat.Application.Abstraction.Services.Employees;
 using LinkDev.Talabat.Application.Abstraction.Services.Products;
+using LinkDev.Talabat.Application.Services.Employees;
 using LinkDev.Talabat.Application.Services.Products;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using System;
@@ -19,6 +21,7 @@ namespace LinkDev.Talabat.Application.Services
             private readonly IUnitOfWork _unitOfWork;
             private readonly IMapper _mapper;
             private readonly Lazy<IProductService> _productService;
+            private readonly Lazy<IEmployeeService> _employeeService;
 
             public ServiceManager(IUnitOfWork unitOfWork, IMapper mapper)
             {
@@ -26,6 +29,7 @@ namespace LinkDev.Talabat.Application.Services
                 _mapper = mapper;
                 // Fixed: removed asterisks and used correct field name
                 _productService = new Lazy<IProductService>(() => new ProductService(_unitOfWork,_mapper));
+                _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService (_unitOfWork,_mapper));
             }
 
             public IProductService ProductService
@@ -33,6 +37,17 @@ namespace LinkDev.Talabat.Application.Services
                 get
                 {
                     return _productService.Value;
+                    
+                }
+            }
+
+            public IEmployeeService employeeService
+
+            {
+                get
+                {
+                    return _employeeService.Value;
+
                 }
             }
         }
