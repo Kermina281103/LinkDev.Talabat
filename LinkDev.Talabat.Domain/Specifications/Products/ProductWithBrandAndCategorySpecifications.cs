@@ -12,6 +12,18 @@ namespace LinkDev.Talabat.Domain.Specifications.Products
         //The object created via this constructor is used for building the query that will Get all porduct 
         public ProductWithBrandAndCategorySpecifications():base()
         {
+            AddInclude();
+        }
+
+
+        //The spec ojbect creataed via this construcot is for building the query the will get a specific Product 
+        public ProductWithBrandAndCategorySpecifications(int id ):base(id)
+        {
+            AddInclude();
+
+        }
+        private void AddInclude()
+        {
             Includes.Add(P => P.Brand!);
             Includes.Add(P => P.Category!);
         }

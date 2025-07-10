@@ -33,7 +33,8 @@ namespace LinkDev.Talabat.Application.Services.Products
 
         public async Task<ProductToReturnDto> GetProductAsync(int id)
         {
-            var products = await _unitOfWork.GetRepository<Product, int>().GetAsync(id);
+            var spec = new ProductWithBrandAndCategorySpecifications(id);
+            var products = await _unitOfWork.GetRepository<Product, int>().GetWithSpecAsync(spec);
             var productToReturn = _mapper.Map<ProductToReturnDto>(products); ;
             return productToReturn;
         }
