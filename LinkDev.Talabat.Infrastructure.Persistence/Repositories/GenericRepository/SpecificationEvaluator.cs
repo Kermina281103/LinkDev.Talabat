@@ -17,13 +17,19 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
             var query = inputQuery; //dbContext.Set<Product>();
            
             if (spec.Criateria is not null) //P=>P.Id.Equals(id)
-                query.Include(spec.Criateria);
+                query.Where(spec.Criateria);
 
-            //query =_dbConext.Set<Product>.Where(p=>p.Id.Equals(id))
-            //1.p=>p.Brand
-            //2.p=>p.Category
-            //...
-            //..
+            if (spec.OrderBy is not null)
+                query = query.OrderBy(spec.OrderBy);
+            else if (spec.OrderByDes is not null)
+                query = query.OrderByDescending(spec.OrderByDes);
+
+            ///query =_dbConext.Set<Product>.Where(p=>p.Id.Equals(id))
+            ///1.p=>p.Brand
+            ///2.p=>p.Category
+            ///...
+            ///..
+          
             query = spec.Includes.Aggregate(query, (currenctExpression, includExpression) =>currenctExpression.Include(includExpression));
 
 

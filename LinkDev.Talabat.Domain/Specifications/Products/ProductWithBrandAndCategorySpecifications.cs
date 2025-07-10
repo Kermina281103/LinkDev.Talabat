@@ -10,10 +10,15 @@ namespace LinkDev.Talabat.Domain.Specifications.Products
     public class ProductWithBrandAndCategorySpecifications:BaseSpecifications<Product,int>
     {
         //The object created via this constructor is used for building the query that will Get all porduct 
-        public ProductWithBrandAndCategorySpecifications():base()
+        public ProductWithBrandAndCategorySpecifications(string? sort):base()
         {
             AddInclude();
+
+            AddSorting(sort);
         }
+
+
+
 
 
         //The spec ojbect creataed via this construcot is for building the query the will get a specific Product 
@@ -22,11 +27,36 @@ namespace LinkDev.Talabat.Domain.Specifications.Products
             AddInclude();
 
         }
-        private void AddInclude()
+
+
+        #region Helper Methods 
+        private protected override void AddSorting(string? sort)
         {
-            Includes.Add(P => P.Brand!);
-            Includes.Add(P => P.Category!);
+            switch (sort)
+            {
+                case "nameDesc":
+                    AddOrderByDes(P => P.Name);
+                    break;
+                case "priceAsc":
+                    AddOrderBy(P => P.Price);
+                    break;
+                case "priceDesc":
+                    AddOrderByDes(P => P.Price);
+                    break;
+                default:
+                    AddOrderBy(P => P.Name);
+                    break;
+            }
         }
+
+        private protected override void AddInclude()
+        {
+            base.AddInclude();
+            Includes.Add(e => e.Brand!);
+            Includes.Add(e => e.Category!);
+        } 
+        #endregion
+
 
 
     }

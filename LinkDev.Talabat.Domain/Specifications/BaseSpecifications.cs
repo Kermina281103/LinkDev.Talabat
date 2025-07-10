@@ -15,6 +15,8 @@ namespace LinkDev.Talabat.Domain.Specifications
     {
         public Expression<Func<TEntity, bool>>? Criateria { get; set; } = null;
         public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new();
+        public Expression<Func<TEntity, object>>? OrderBy { get; set; } = null;
+        public Expression<Func<TEntity, object>>? OrderByDes { get; set; } = null;
 
         public BaseSpecifications()
         {
@@ -24,6 +26,29 @@ namespace LinkDev.Talabat.Domain.Specifications
         {
             Criateria = E => E.Id.Equals(id);
         }
+
+        private protected  virtual void AddOrderBy(Expression<Func<TEntity,object>> OrderByExpression)
+        {
+            OrderBy = OrderByExpression;
+        }
+
+        private protected virtual void AddOrderByDes(Expression<Func<TEntity,object>> OrderByExpressionDes)
+        {
+            OrderByDes = OrderByExpressionDes;
+        }
+
+
+        #region Helper Methods 
+        private protected virtual void AddInclude()
+        {
+
+        }
+
+        private protected virtual void AddSorting(string? sort)
+        {
+
+        } 
+        #endregion
 
     }
 }
