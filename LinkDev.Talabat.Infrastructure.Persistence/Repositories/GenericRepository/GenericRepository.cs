@@ -46,6 +46,10 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
         public void  Delete(TEntity entity)
         => _dbContext.Set<TEntity>().Remove(entity);
 
+        public async Task<int> GetCountAsync(ISpecification<TEntity, TKey> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();   
+        }
 
         #region Help 
 
@@ -53,6 +57,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
         {
             return SpecificationEvaluator<TEntity, TKey>.GetQuery(_dbContext.Set<TEntity>(), spec);
         }
+
         #endregion
 
     }

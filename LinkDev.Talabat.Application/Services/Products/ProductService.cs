@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LinkDev.Talabat.Application.Abstraction.Common;
 using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Application.Abstraction.Services.Products;
 using LinkDev.Talabat.Domain.Contract.Persistence;
@@ -22,14 +23,24 @@ namespace LinkDev.Talabat.Application.Services.Products
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ProductToReturnDto>> GetProductsAsync(ProductSpecParams specParams)
+        public async Task<Pagination<ProductToReturnDto>> GetProductsAsync(ProductSpecParams specParams)
         {
             var spec = new ProductWithBrandAndCategorySpecifications(
                 specParams.Sort,specParams.BrandId,specParams.CategoryId,specParams.PageIndex,specParams.PageSize);
 
             var products = await  _unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec);
-            var productToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
-            return  productToReturn;
+            
+            var specCount =new ProductForCountSpecification(specParams.BrandId, specParams.CategoryId);
+            var count = await _unitOfWork.GetRepository<Product, int>().GetCountAsync(specCount);
+           
+            
+            var data = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
+            return new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize,count)
+            {
+                Data = data,
+              
+
+            };
         }
 
         public async Task<ProductToReturnDto> GetProductAsync(int id)
