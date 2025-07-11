@@ -29,7 +29,7 @@ namespace LinkDev.Talabat.Application.Services
                 _mapper = mapper;
                 // Fixed: removed asterisks and used correct field name
                 _productService = new Lazy<IProductService>(() => new ProductService(_unitOfWork,_mapper));
-                _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService (_unitOfWork,_mapper));
+               _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService (_unitOfWork,_mapper));
             }
 
             public IProductService ProductService
@@ -41,7 +41,7 @@ namespace LinkDev.Talabat.Application.Services
                 }
             }
 
-            public IEmployeeService employeeService
+           public IEmployeeService employeeService
 
             {
                 get

@@ -18,13 +18,20 @@ namespace LinkDev.Talabat.Domain.Specifications
         public Expression<Func<TEntity, object>>? OrderBy { get; set; } = null;
         public Expression<Func<TEntity, object>>? OrderByDes { get; set; } = null;
 
-        public BaseSpecifications()
-        {
-           // Criateria = null;//Default 
-        }
+     
         public BaseSpecifications(TKey id)
         {
             Criateria = E => E.Id.Equals(id);
+        }
+
+        protected BaseSpecifications()
+        {
+            
+        }
+
+        protected BaseSpecifications(Expression<Func<TEntity,bool>> CriteriaExpresion)
+        {
+            Criateria = CriteriaExpresion;   
         }
 
         private protected  virtual void AddOrderBy(Expression<Func<TEntity,object>> OrderByExpression)

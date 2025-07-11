@@ -9,10 +9,10 @@ namespace LinkDev.Talabat.Domain.Specifications.Employees
 {
     public class EmployeeWithDepartmentSpecifications:BaseSpecifications<Employee,int>
     {
-        public EmployeeWithDepartmentSpecifications():base()
-        {
-            Includes.Add(e => e.Department!);
-        }
+       public EmployeeWithDepartmentSpecifications():base()
+       {
+           Includes.Add(e => e.Department!);
+       }
 
         public EmployeeWithDepartmentSpecifications(int id ):base(id)
         {

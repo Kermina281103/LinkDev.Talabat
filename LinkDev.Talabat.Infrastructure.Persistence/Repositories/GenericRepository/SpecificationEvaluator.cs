@@ -17,7 +17,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
             var query = inputQuery; //dbContext.Set<Product>();
            
             if (spec.Criateria is not null) //P=>P.Id.Equals(id)
-                query.Where(spec.Criateria);
+                query=query.Where(spec.Criateria);
 
             if (spec.OrderBy is not null)
                 query = query.OrderBy(spec.OrderBy);
