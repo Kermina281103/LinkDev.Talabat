@@ -18,7 +18,11 @@ namespace LinkDev.Talabat.Domain.Contract
         public Expression<Func<TEntity,object>>? OrderBy { get; set; }
 
         public Expression<Func<TEntity,object>>? OrderByDes { get; set; }
-
+        public int Skip { get; set; }
+        public int Take { get; set; }
+        public bool IsPaginationEnable { get; set; }
 
     }
 }
+
+/// Lord Have Mercy 

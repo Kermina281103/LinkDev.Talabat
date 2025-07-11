@@ -19,6 +19,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
             if (spec.Criateria is not null) //P=>P.Id.Equals(id)
                 query=query.Where(spec.Criateria);
 
+
             if (spec.OrderBy is not null)
                 query = query.OrderBy(spec.OrderBy);
             else if (spec.OrderByDes is not null)
@@ -29,6 +30,11 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
             ///2.p=>p.Category
             ///...
             ///..
+           
+            
+            if (spec.IsPaginationEnable)
+                query = query.Skip(spec.Skip).Take(spec.Take);
+
           
             query = spec.Includes.Aggregate(query, (currenctExpression, includExpression) =>currenctExpression.Include(includExpression));
 

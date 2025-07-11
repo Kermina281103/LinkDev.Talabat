@@ -10,11 +10,11 @@ namespace LinkDev.Talabat.Domain.Specifications.Products
     public class ProductWithBrandAndCategorySpecifications:BaseSpecifications<Product,int>
     {
         //The object created via this constructor is used for building the query that will Get all porduct 
-        public ProductWithBrandAndCategorySpecifications(string? sort,int? brandId ,int? categoryId)
+        public ProductWithBrandAndCategorySpecifications(string? sort ,int? BrandId,int? CategoryId,int PageIndex,int PageSize )
             :base( P=>
-                 (!brandId.HasValue||P.BrandId==brandId.Value)
+                 (!BrandId.HasValue||P.BrandId== BrandId.Value)
                  &&
-                 (!categoryId.HasValue|| P.CategoryId==categoryId.Value)
+                 (!CategoryId.HasValue|| P.CategoryId== CategoryId.Value)
                  
                  
                  )
@@ -22,6 +22,9 @@ namespace LinkDev.Talabat.Domain.Specifications.Products
             AddInclude();
 
             AddSorting(sort);
+
+
+            AddPagiation(PageSize * (PageIndex - 1), PageSize);
         }
 
 

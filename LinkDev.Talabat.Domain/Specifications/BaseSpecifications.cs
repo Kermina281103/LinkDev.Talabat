@@ -17,8 +17,10 @@ namespace LinkDev.Talabat.Domain.Specifications
         public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new();
         public Expression<Func<TEntity, object>>? OrderBy { get; set; } = null;
         public Expression<Func<TEntity, object>>? OrderByDes { get; set; } = null;
+        public int Skip { get; set; } = 0;
+        public int Take { get; set; } = 0;
+        public bool IsPaginationEnable { get; set; } = false;
 
-     
         public BaseSpecifications(TKey id)
         {
             Criateria = E => E.Id.Equals(id);
@@ -55,6 +57,12 @@ namespace LinkDev.Talabat.Domain.Specifications
         {
 
         } 
+       private protected virtual void AddPagiation(int skip ,int take)
+        {
+            IsPaginationEnable = true;
+            Skip = skip;
+            Take = take;
+        }
         #endregion
 
     }
