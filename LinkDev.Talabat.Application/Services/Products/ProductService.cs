@@ -26,11 +26,11 @@ namespace LinkDev.Talabat.Application.Services.Products
         public async Task<Pagination<ProductToReturnDto>> GetProductsAsync(ProductSpecParams specParams)
         {
             var spec = new ProductWithBrandAndCategorySpecifications(
-                specParams.Sort,specParams.BrandId,specParams.CategoryId,specParams.PageIndex,specParams.PageSize);
+                specParams.Sort,specParams.BrandId,specParams.CategoryId,specParams.PageIndex,specParams.PageSize,specParams.Search);
 
             var products = await  _unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec);
             
-            var specCount =new ProductForCountSpecification(specParams.BrandId, specParams.CategoryId);
+            var specCount =new ProductForCountSpecification(specParams.BrandId, specParams.CategoryId,specParams.Search);
             var count = await _unitOfWork.GetRepository<Product, int>().GetCountAsync(specCount);
            
             

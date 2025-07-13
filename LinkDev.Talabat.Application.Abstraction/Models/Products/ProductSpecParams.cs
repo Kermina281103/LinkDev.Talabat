@@ -13,8 +13,8 @@ namespace LinkDev.Talabat.Application.Abstraction.Models.Products
         public int? CategoryId { get; set; }
         public int PageIndex { get; set; } = 1;
         private const int maxSize = 100;
-        private int pageSize;
-        public int PageSize
+        private int pageSize=10;
+        public int PageSize 
         {
             get => pageSize;
             set
@@ -22,5 +22,12 @@ namespace LinkDev.Talabat.Application.Abstraction.Models.Products
                 pageSize = value > maxSize ? maxSize : value;
             }
         }
-    }
+
+        private string? search;
+        public string? Search
+        {
+            get => search;
+            set { search = value?.ToUpper(); }
+        }
+     }
 }
