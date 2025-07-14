@@ -1,4 +1,5 @@
 ﻿using LinkDev.Talabat.APIs.Controllers.Base;
+using LinkDev.Talabat.APIs.Controllers.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,7 +16,7 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Buggy
         //Get: /api/buggy/notfound
         public IActionResult GetNotFoundRequest()
         {
-            return NotFound(new {StatusCode=404 ,NotFound="Not Found "});//404
+            return NotFound(new ApiResponse( 404));//404
         }
 
         [HttpGet("servererror")] //Get: /api/buggy/servererror
@@ -29,7 +30,7 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Buggy
 
         public IActionResult GetBadRequest()
         {
-            return BadRequest(new {StatusCode=400,Message="Bad Request"});//400
+            return BadRequest(new ApiResponse(400));
         }
         [HttpGet("badrequest/{id}")] // GEt: /api/buggy/badrequest/five
         public IActionResult GetValidationError(int id) //=>400
