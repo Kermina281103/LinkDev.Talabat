@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using LinkDev.Talabat.Application;
+using LinkDev.Talabat.APIs.Controllers.Errors;
+using Microsoft.Extensions.Options;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -22,8 +24,42 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Services 
             // Add services to the container.
+           
             builder.Services.AddControllers()
-                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly)
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = false;
+                    options.InvalidModelStateResponseFactory = (actionContext) =>
+                    {
+                        var errors = actionContext.ModelState.Where(p => p.Value!.Errors.Count > 0)
+                                   .SelectMany(p => p.Value!.Errors)
+                                   .Select(E => E.ErrorMessage);
+
+                        return new BadRequestObjectResult(new ApiValidationErrorResponse()
+                        {
+                            Errors = errors
+                        });
+                    };
+                });
+            ///or 
+           
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = false;
+                options.InvalidModelStateResponseFactory = (actionContext) =>
+                {
+                    var errors = actionContext.ModelState.Where(p => p.Value!.Errors.Count > 0)
+                               .SelectMany(p => p.Value!.Errors)
+                               .Select(E => E.ErrorMessage);
+
+                    return new BadRequestObjectResult(new ApiValidationErrorResponse()
+                    {
+                        Errors = errors
+                    });
+                };
+            });
+            
             
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             // builder.Services.AddOpenApi();

@@ -35,6 +35,20 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Buggy
         [HttpGet("badrequest/{id}")] // GEt: /api/buggy/badrequest/five
         public IActionResult GetValidationError(int id) //=>400
         {
+          /// if (!ModelState.IsValid)
+          /// {
+          ///     var errors = ModelState.Where(p => p.Value.Errors.Count > 0)
+          ///                        .SelectMany(p => p.Value.Errors)
+          ///                        .Select(E => E.ErrorMessage);
+          ///
+          ///     return BadRequest(new ApiValidationErrorResponse()
+          ///     {
+          ///         Errors=errors
+          ///     });
+          /// 
+          /// }
+                
+                
             return Ok();
         }
 
