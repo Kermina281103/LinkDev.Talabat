@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using LinkDev.Talabat.Application;
 using LinkDev.Talabat.APIs.Controllers.Errors;
 using Microsoft.Extensions.Options;
+using LinkDev.Talabat.APIs.MiddleWares;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -80,13 +81,15 @@ namespace LinkDev.Talabat.APIs
             #endregion
 
             var app = builder.Build();
-
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             #region DataBase Initialzation 
+            
             await app.InitializeStoreContextAsync();
             #endregion
 
 
             #region Configure Kestrel MiddleWare 
+
 
             {// Configure the HTTP request pipeline.
                 if (app.Environment.IsDevelopment())

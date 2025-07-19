@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.APIs.Controllers.Errors
@@ -28,5 +29,16 @@ namespace LinkDev.Talabat.APIs.Controllers.Errors
                 _ => null
             };
         }
+
+
+        public override string ToString()
+        {
+            var SerializerOptions = new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+            return JsonSerializer.Serialize(this,SerializerOptions);
+        }
+
     }
 }
