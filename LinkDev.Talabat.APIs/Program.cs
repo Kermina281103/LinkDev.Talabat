@@ -24,17 +24,22 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Services 
             // Add services to the container.
-           
+
             builder.Services.AddControllers()
                 .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly)
                 .ConfigureApiBehaviorOptions(options =>
                 {
-                    options.SuppressModelStateInvalidFilter = false;
+                options.SuppressModelStateInvalidFilter = false;
                     options.InvalidModelStateResponseFactory = (actionContext) =>
                     {
                         var errors = actionContext.ModelState.Where(p => p.Value!.Errors.Count > 0)
-                                   .SelectMany(p => p.Value!.Errors)
-                                   .Select(E => E.ErrorMessage);
+                              .Select(p => new ApiValidationErrorResponse.ValidationError()
+                              {
+                                  Field = p.Key,
+                                  Errors = p.Value!.Errors.Select(E => E.ErrorMessage)
+                              }
+                            );
+
 
                         return new BadRequestObjectResult(new ApiValidationErrorResponse()
                         {
@@ -50,8 +55,12 @@ namespace LinkDev.Talabat.APIs
                 options.InvalidModelStateResponseFactory = (actionContext) =>
                 {
                     var errors = actionContext.ModelState.Where(p => p.Value!.Errors.Count > 0)
-                               .SelectMany(p => p.Value!.Errors)
-                               .Select(E => E.ErrorMessage);
+                               .Select(p => new ApiValidationErrorResponse.ValidationError()
+                               {
+                                   Field = p.Key,
+                                   Errors = p.Value!.Errors.Select(E => E.ErrorMessage)
+                               }
+                );
 
                     return new BadRequestObjectResult(new ApiValidationErrorResponse()
                     {

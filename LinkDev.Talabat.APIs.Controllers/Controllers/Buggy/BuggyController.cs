@@ -37,17 +37,21 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Buggy
         {
           /// if (!ModelState.IsValid)
           /// {
-          ///     var errors = ModelState.Where(p => p.Value.Errors.Count > 0)
-          ///                        .SelectMany(p => p.Value.Errors)
-          ///                        .Select(E => E.ErrorMessage);
-          ///
-          ///     return BadRequest(new ApiValidationErrorResponse()
+          ///      var errors = ModelState.Where(p => p.Value.Errors.Count > 0)
+          ///                        .Select(p => new ApiValidationErrorResponse.ValidationError()
+          ///                        {
+          ///                            Field = p.Key,
+          ///                            Errors = p.Value.Errors.Select(E => E.ErrorMessage)
+          /// 
+          ///                        });
+          /// 
+          ///      return BadRequest(new ApiValidationErrorResponse()
           ///     {
           ///         Errors=errors
           ///     });
           /// 
           /// }
-                
+          ///      
                 
             return Ok();
         }
