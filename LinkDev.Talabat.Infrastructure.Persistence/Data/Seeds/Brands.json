@@ -1,0 +1,14 @@
+[
+    {
+        "Id": 0,
+        "Name": "Starbucks",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "House Special",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+]
