@@ -25,7 +25,12 @@ namespace LinkDev.Talabat.APIs.MiddleWares
             {
                 //Logic will be exectuted for the reques 
                await _next(context);//Go to next middleware or the application itself
-                               // Logic with will be exectured for the response 
+               /// if (context.Response.StatusCode == (int)HttpStatusCode.NotFound)
+               /// {
+               ///     var response = new ApiResponse((int)HttpStatusCode.NotFound, $"the requested endpoing :{context.Request.Path} is not found ");
+               ///     await context.Response.WriteAsync(response.ToString());
+               /// }
+                // Logic with will be exectured for the response 
             }
             catch (Exception ex)
             {
