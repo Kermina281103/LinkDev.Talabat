@@ -1,0 +1,20 @@
+[
+    {
+        "Id": 0,
+        "Name": "Beverages",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Food",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Desserts",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+]

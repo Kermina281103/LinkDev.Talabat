@@ -1,0 +1,200 @@
+[
+    {
+        "Id": 0,
+        "Name": "Double Caramel Frappuccino",
+        "Description": "Rich and creamy blended coffee drink with caramel syrup and whipped cream",
+        "PictureUrl": "Data/Images/Products/double-caramel-frappuccino.png",
+        "Price": 5.75,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "White Chocolate Mocha Frappuccino",
+        "Description": "Blended coffee drink with white chocolate syrup and whipped cream",
+        "PictureUrl": "Data/Images/Products/white-chocolate-mocha.png",
+        "Price": 5.95,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Hot Caramel Macchiato",
+        "Description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle",
+        "PictureUrl": "Data/Images/Products/hot-caramel-macchiato.png",
+        "Price": 4.85,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Caramel Macchiato",
+        "Description": "Iced espresso with cold milk, vanilla syrup, and caramel drizzle",
+        "PictureUrl": "Data/Images/Products/iced-caramel-macchiato.png",
+        "Price": 4.85,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "White Chocolate Mocha",
+        "Description": "Espresso with steamed milk, white chocolate syrup, and whipped cream",
+        "PictureUrl": "Data/Images/Products/white-chocolate-mocha-frappuccino.png",
+        "Price": 4.65,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Cafe Latte",
+        "Description": "Iced espresso with cold milk for a smooth and refreshing coffee experience",
+        "PictureUrl": "Data/Images/Products/iced-cafe-latte.png",
+        "Price": 4.25,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Matcha Latte",
+        "Description": "Premium matcha green tea powder with cold milk over ice",
+        "PictureUrl": "Data/Images/Products/iced-matcha-latte.png",
+        "Price": 4.95,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Matcha",
+        "Description": "Pure matcha green tea served over ice for a refreshing experience",
+        "PictureUrl": "Data/Images/Products/iced-matcha.png",
+        "Price": 3.95,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Chai Tea Latte with Oleato Golden Foam",
+        "Description": "Spiced chai tea latte with creamy Oleato golden foam over ice",
+        "PictureUrl": "Data/Images/Products/iced-chai-tea-latte-with-oleato-golden-foam.png",
+        "Price": 5.45,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced London Fog Tea Latte",
+        "Description": "Earl Grey tea with vanilla syrup and cold milk over ice",
+        "PictureUrl": "Data/Images/Products/iced-london-fog-tea-latte.png",
+        "Price": 4.45,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Iced Black Tea Lemonade",
+        "Description": "Refreshing black tea blended with lemonade over ice",
+        "PictureUrl": "Data/Images/Products/iced-black-tea-lemonade.png",
+        "Price": 3.65,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Dragon Drink Starbucks Refreshers with Oleato Golden Foam",
+        "Description": "Tropical dragon fruit refresher with creamy Oleato golden foam",
+        "PictureUrl": "Data/Images/Products/dragon-drink-starbucks-refreshers-beverage-with-oleato-golden-foam.png",
+        "Price": 5.25,
+        "CategoryId": 1002,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Double Smoked Bacon Cheddar and Egg Sandwich",
+        "Description": "Hearty breakfast sandwich with double smoked bacon, cheddar cheese, and egg",
+        "PictureUrl": "Data/Images/Products/double-smoked-bacon-cheddar-and-egg-sandwich.png",
+        "Price": 6.45,
+        "CategoryId": 1003,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Turkey Bacon Cheddar and Egg White Sandwich",
+        "Description": "Healthier breakfast option with turkey bacon, cheddar cheese, and egg whites",
+        "PictureUrl": "Data/Images/Products/turkey-bacon-cheddar-and-egg-white-sandwich.png",
+        "Price": 5.95,
+        "CategoryId": 1003,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Greek Salad",
+        "Description": "Fresh Mediterranean salad with olives, feta cheese, and vegetables",
+        "PictureUrl": "Data/Images/Products/greek-salad.png",
+        "Price": 8.25,
+        "CategoryId": 1003,
+        "BrandId": 1002,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Blueberry Cheesecake",
+        "Description": "Rich and creamy cheesecake topped with fresh blueberries",
+        "PictureUrl": "Data/Images/Products/blueberry-cheesecake.png",
+        "Price": 4.75,
+        "CategoryId": 1004,
+        "BrandId": 1003,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Honey Cake",
+        "Description": "Traditional honey cake with layers of sweet honey-infused sponge",
+        "PictureUrl": "Data/Images/Products/honey-cake.png",
+        "Price": 3.95,
+        "CategoryId": 1004,
+        "BrandId": 1003,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Glazed Donuts",
+        "Description": "Classic glazed donuts with a sweet, shiny glaze coating",
+        "PictureUrl": "Data/Images/Products/glazed-donuts.png",
+        "Price": 2.45,
+        "CategoryId": 1004,
+        "BrandId": 1003,
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    }
+]
