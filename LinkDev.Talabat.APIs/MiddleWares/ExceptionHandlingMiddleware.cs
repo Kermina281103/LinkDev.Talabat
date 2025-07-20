@@ -1,5 +1,6 @@
 ﻿using Azure;
 using LinkDev.Talabat.APIs.Controllers.Errors;
+using LinkDev.Talabat.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 
@@ -41,18 +42,40 @@ namespace LinkDev.Talabat.APIs.MiddleWares
                 }
                 #endregion
 
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application/json";
-
-                var response = _enviroment.IsDevelopment() ? new ApiExceptionResponse((int)
-                    HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace!.ToString())
-                    : new ApiExceptionResponse((int)HttpStatusCode.InternalServerError, ex.Message);
-                
-                
-              await  context.Response.WriteAsync(response.ToString());
+                await HandleExceptionsAsync(context, ex);
             }
-            
 
+
+        }
+
+        private async Task HandleExceptionsAsync(HttpContext context, Exception ex)
+        {
+            ApiResponse response;
+            switch (ex)
+            {
+                case NotFoundException:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    response = new ApiResponse( (int)HttpStatusCode.NotFound, ex.Message);
+                    break;
+                case BadRequesException:
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    response = new ApiResponse((int)HttpStatusCode.BadRequest, ex.Message);
+                    break;
+                default:
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    response = _enviroment.IsDevelopment() ? new ApiExceptionResponse((int)
+                     HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace!.ToString())
+                    : new ApiExceptionResponse((int)HttpStatusCode.InternalServerError, ex.Message);
+                    break;
+            }
+
+
+            context.Response.ContentType = "application/json";
+
+         
+
+
+            await context.Response.WriteAsync(response.ToString());
         }
     }
 
