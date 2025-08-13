@@ -1,14 +1,11 @@
 
-using LinkDev.Talabat.APIs.Extensions;
-using LinkDev.Talabat.Infrastructure.Persistence;
-using LinkDev.Talabat.Infrastructure.Persistence.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using LinkDev.Talabat.Application;
 using LinkDev.Talabat.APIs.Controllers.Errors;
-using Microsoft.Extensions.Options;
+using LinkDev.Talabat.APIs.Extensions;
 using LinkDev.Talabat.APIs.MiddleWares;
+using LinkDev.Talabat.Application;
+using LinkDev.Talabat.Infrastructure;
+using LinkDev.Talabat.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -77,7 +74,7 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddSwaggerGen();
             builder.Services.AddPersistenceService(builder.Configuration);
             builder.Services.AddApplicationServices();
-            
+            builder.Services.AddInfrastructureServices(builder.Configuration);
             #endregion
 
             var app = builder.Build();
