@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using LinkDev.Talabat.Application.Abstraction.Models.Basket;
 using LinkDev.Talabat.Application.Abstraction.Models.Employees;
 using LinkDev.Talabat.Application.Abstraction.Models.Products;
+using LinkDev.Talabat.Domain.Entities.Basket;
 using LinkDev.Talabat.Domain.Entities.Employees;
 using LinkDev.Talabat.Domain.Entities.Products;
 using System;
@@ -24,7 +26,8 @@ namespace LinkDev.Talabat.Application.Mapping
                 .ForMember(d => d.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductCategory, CategoryDto>();
-
+            CreateMap<Basket, BasketDto>().ReverseMap();
+            CreateMap<BasketItem, BasketItemDto>().ReverseMap();
 
             CreateMap<Employee, EmployeeToReturn>()
                 .ForMember(d => d.Department, o => o.MapFrom(src => src.Department!.Name));
