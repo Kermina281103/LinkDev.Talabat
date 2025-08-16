@@ -1,4 +1,5 @@
-﻿using LinkDev.Talabat.Domain.Contract.Persistence;
+﻿using LinkDev.Talabat.Domain.Contract.Infrastructure;
+using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using LinkDev.Talabat.Infrastructure.Persistence.UnitOfWorks;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
             });
             services.AddScoped<IStoreContextInitializer, StoreContextInitializer>();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            
             
             return services;
         }

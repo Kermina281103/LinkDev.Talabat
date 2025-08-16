@@ -58,7 +58,7 @@ namespace LinkDev.Talabat.Application.Services
                 }
             }
 
-            public IBasketService BasketService { get => throw new NotImplementedException();}
+            public IBasketService BasketService => _basketService.Value;
         }
     }
 }
