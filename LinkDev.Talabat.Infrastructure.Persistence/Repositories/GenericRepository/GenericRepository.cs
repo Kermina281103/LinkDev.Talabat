@@ -1,6 +1,7 @@
 ﻿using LinkDev.Talabat.Domain.Contract;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Entities.Products;
+using LinkDev.Talabat.Infrastructure.Persistence.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

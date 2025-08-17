@@ -21,4 +21,10 @@
     <ProjectReference Include="..\LinkDev.Talabat.Domain\LinkDev.Talabat.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Identity\Migrations\" />
+    <Folder Include="Identity\Interceptors\" />
+    <Folder Include="Identity\Seeds\" />
+  </ItemGroup>
+
 </Project>

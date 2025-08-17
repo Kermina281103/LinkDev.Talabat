@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Persistence
+namespace LinkDev.Talabat.Infrastructure.Persistence.Data
 {
     public class StoreDbContext:DbContext
     {
