@@ -45,8 +45,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
             #endregion
 
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            
-            
+          
             return services;
         }
     }

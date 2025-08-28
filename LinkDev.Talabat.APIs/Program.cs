@@ -1,10 +1,16 @@
 
 using LinkDev.Talabat.APIs.Controllers.Errors;
 using LinkDev.Talabat.APIs.Extensions;
+using LinkDev.Talabat.APIs.Extensions.IdentityExtensions;
 using LinkDev.Talabat.APIs.MiddleWares;
 using LinkDev.Talabat.Application;
+using LinkDev.Talabat.Domain.Contract.Persistence.DbInitializer;
+using LinkDev.Talabat.Domain.Entities.Identity;
 using LinkDev.Talabat.Infrastructure;
 using LinkDev.Talabat.Infrastructure.Persistence;
+using LinkDev.Talabat.Infrastructure.Persistence.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs
@@ -74,14 +80,16 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddSwaggerGen();
             builder.Services.AddPersistenceService(builder.Configuration);
             builder.Services.AddApplicationServices();
-            builder.Services.AddInfrastructureServices(builder.Configuration);
+           builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            builder.Services.AddIdentityServices();
             #endregion
 
             var app = builder.Build();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             #region DataBase Initialzation 
             
-            await app.InitializeStoreContextAsync();
+            await app.InitializeDbAsync();
             #endregion
 
 

@@ -17,6 +17,9 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Identity
 
         public override async Task SeedAsync()
         {
+            if (!_userManager.Users.Any())
+            {
+
             var user = new ApplicationUser()
             {
                 DisplayName = "Kermina Maged",
@@ -26,6 +29,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Identity
 
             };
             await _userManager.CreateAsync(user, "P@ssw0rd");
+            }
            
         }
     }
