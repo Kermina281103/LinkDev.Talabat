@@ -2,6 +2,7 @@
 using LinkDev.Talabat.APIs.Controllers.Errors;
 using LinkDev.Talabat.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace LinkDev.Talabat.APIs.MiddleWares
@@ -62,9 +63,20 @@ namespace LinkDev.Talabat.APIs.MiddleWares
                     context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                     response = new ApiResponse( (int)HttpStatusCode.NotFound, ex.Message);
                     break;
+                case ValidationExceptions validationExceptions:
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    response = new ApiValidationErrorResponse(ex.Message)
+                    {
+                        Errors = (IEnumerable<ApiValidationErrorResponse.ValidationError>)validationExceptions.Errors
+                    };
+                    break;
                 case BadRequesException:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     response = new ApiResponse((int)HttpStatusCode.BadRequest, ex.Message);
+                    break;
+                case UnAuthorizedExceptoin:
+                    context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    response = new ApiResponse((int)HttpStatusCode.Unauthorized, ex.Message);
                     break;
                 default:
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
