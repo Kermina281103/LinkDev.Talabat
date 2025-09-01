@@ -3,6 +3,7 @@ using LinkDev.Talabat.Application.Abstraction.Models;
 using LinkDev.Talabat.Application.Abstraction.Models.Auth;
 using LinkDev.Talabat.Application.Abstraction.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,18 @@ namespace LinkDev.Talabat.APIs.Controllers.Account
             var result = await serviceManager.AuthService.GetUserAddress(User);
           
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPut("address")] //Put : /api/account/address
+        
+        public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
+        {
+            var result = await serviceManager.AuthService.UpdateUserAddress(User,address);
+           
+            return Ok(result);
+
+
         }
     }
 }

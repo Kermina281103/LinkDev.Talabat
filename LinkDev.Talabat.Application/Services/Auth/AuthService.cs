@@ -18,7 +18,8 @@ namespace LinkDev.Talabat.Application.Services.Auth
     public class AuthService(
         IMapper mapper,
         IOptions<JwtSettings> jwtSettings
-        ,UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager) : IAuthServices
+        ,UserManager<ApplicationUser> userManager
+        ,SignInManager<ApplicationUser> signInManager) : IAuthServices
     {
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
         public async Task<UserDto> LoginAsync(LoginDto model)
@@ -113,7 +114,7 @@ namespace LinkDev.Talabat.Application.Services.Auth
             };
         }
 
-        public async Task<AddressDto> GetUserAddress(ClaimsPrincipal claimsPrinciple)
+        public async Task<AddressDto?> GetUserAddress(ClaimsPrincipal claimsPrinciple)
         {
             var email = claimsPrinciple?.FindFirstValue(ClaimTypes.Email);
             var user = await userManager.FindUserWithAddress(claimsPrinciple!);
@@ -121,6 +122,24 @@ namespace LinkDev.Talabat.Application.Services.Auth
             var address = mapper.Map<AddressDto>(user!.Address);
 
             return address;
+        }
+
+        public async Task<AddressDto> UpdateUserAddress(ClaimsPrincipal claimsPrincipal,AddressDto addressDto)
+        {
+            var updatedAddress = mapper.Map<Address>(addressDto);
+
+            var user = await userManager.FindUserWithAddress(claimsPrincipal);
+
+            if (user?.Address is not null)
+                updatedAddress.Id = user.Address.Id;
+
+            user!.Address = updatedAddress;
+            var result = await userManager.UpdateAsync(user);
+            if (!result.Succeeded) throw new BadRequesException(result.Errors.Select(error => error.Description).Aggregate((X, Y) => $"{X},{Y}"));
+
+            return addressDto;
+            
+
         }
     }
 }
