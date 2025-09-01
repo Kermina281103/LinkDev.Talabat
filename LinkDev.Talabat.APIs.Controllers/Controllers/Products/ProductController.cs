@@ -3,6 +3,7 @@ using LinkDev.Talabat.APIs.Controllers.Errors;
 using LinkDev.Talabat.Application.Abstraction.Common;
 using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Application.Abstraction.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Products
 {
    public class ProductController(IServiceManager serviceManager):BaseApiController
     {
+       // [Authorize(AuthenticationSchemes ="Kermina")]
         [HttpGet]  //Get :/api/Product
-
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
             var products = await serviceManager.ProductService.GetProductsAsync(specParams);
