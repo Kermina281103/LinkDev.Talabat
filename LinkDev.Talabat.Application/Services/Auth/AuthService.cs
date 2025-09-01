@@ -93,5 +93,19 @@ namespace LinkDev.Talabat.Application.Services.Auth
                 );
             return new JwtSecurityTokenHandler().WriteToken(tokenobj);
         }
+
+        public async Task<UserDto> GetCurrentUser(ClaimsPrincipal claimsPrincipal)
+        {
+            var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
+            var user = await userManager.FindByEmailAsync(email!);
+
+            return new UserDto()
+            {
+                Id = user!.Id,
+                Email = user!.Email!,
+                DisplayName = user.DisplayName,
+                Token = await GenerateTokenAsync(user)
+            };
+        }
     }
 }
