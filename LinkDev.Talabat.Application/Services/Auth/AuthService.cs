@@ -1,6 +1,9 @@
-﻿using LinkDev.Talabat.Application.Abstraction.Models.Auth;
+﻿using AutoMapper;
+using LinkDev.Talabat.Application.Abstraction.Models;
+using LinkDev.Talabat.Application.Abstraction.Models.Auth;
 using LinkDev.Talabat.Application.Abstraction.Services.Auth;
 using LinkDev.Talabat.Application.Exceptions;
+using LinkDev.Talabat.Application.Extensions;
 using LinkDev.Talabat.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +15,9 @@ using System.Text;
 
 namespace LinkDev.Talabat.Application.Services.Auth
 {
-    public class AuthService(IOptions<JwtSettings> jwtSettings
+    public class AuthService(
+        IMapper mapper,
+        IOptions<JwtSettings> jwtSettings
         ,UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager) : IAuthServices
     {
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
@@ -106,6 +111,16 @@ namespace LinkDev.Talabat.Application.Services.Auth
                 DisplayName = user.DisplayName,
                 Token = await GenerateTokenAsync(user)
             };
+        }
+
+        public async Task<AddressDto> GetUserAddress(ClaimsPrincipal claimsPrinciple)
+        {
+            var email = claimsPrinciple?.FindFirstValue(ClaimTypes.Email);
+            var user = await userManager.FindUserWithAddress(claimsPrinciple!);
+
+            var address = mapper.Map<AddressDto>(user!.Address);
+
+            return address;
         }
     }
 }
