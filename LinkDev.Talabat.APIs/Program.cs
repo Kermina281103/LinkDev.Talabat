@@ -50,6 +50,10 @@ namespace LinkDev.Talabat.APIs
                             Errors = errors
                         });
                     };
+                })
+                .AddNewtonsoftJson(options=>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             ///or 
            

@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LinkDev.Talabat.APIs.Controllers\LinkDev.Talabat.APIs.Controllers.csproj" />
+  </ItemGroup>
+
 </Project>

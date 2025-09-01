@@ -3,14 +3,8 @@ using LinkDev.Talabat.Application.Abstraction.Models;
 using LinkDev.Talabat.Application.Abstraction.Models.Auth;
 using LinkDev.Talabat.Application.Abstraction.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LinkDev.Talabat.APIs.Controllers.Account
 {
@@ -40,14 +34,14 @@ namespace LinkDev.Talabat.APIs.Controllers.Account
             return Ok(result);
         }
 
-        [Authorize]
-        [HttpGet("address")] //Get : /api/account/address
-        public async Task<ActionResult<AddressDto>> GetUserAddress()
-        {
-            var result = await serviceManager.AuthService.GetUserAddress(User);
-          
-            return Ok(result);
-        }
+       [Authorize]
+       [HttpGet("address")] //Get : /api/account/address
+        public async Task<ActionResult<AddressDto>> GetUserAddress() //Need to exchange to address not address dto found in Domain .Identity 
+       {
+           var result = await serviceManager.AuthService.GetUserAddress(User);
+         
+           return Ok(result);
+       }
 
         [Authorize]
         [HttpPut("address")] //Put : /api/account/address
