@@ -47,6 +47,10 @@ namespace LinkDev.Talabat.Application.Services.Auth
 
         public async Task<UserDto> RegisterAsync(RegisterDto model)
         {
+            //if (CheckEmailExists(model.Email).Result)
+            //    throw new BadRequesException("This email is already in user");
+
+
             var user = new ApplicationUser()
             {
                 DisplayName = model.DisplayName,
@@ -140,6 +144,11 @@ namespace LinkDev.Talabat.Application.Services.Auth
             return addressDto;
             
 
+        }
+
+        public async Task<bool> CheckEmailExists(string email)
+        {
+            return await userManager.FindByEmailAsync(email) is not null;
         }
     }
 }
