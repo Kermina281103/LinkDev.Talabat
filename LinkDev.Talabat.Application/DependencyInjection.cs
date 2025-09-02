@@ -8,6 +8,8 @@ using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
 using LinkDev.Talabat.Application.Services.Baskets;
 using Microsoft.Extensions.Configuration;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
+using LinkDev.Talabat.Application.Abstraction.Services.Orders;
+using LinkDev.Talabat.Application.Services.Orders;
 
 namespace LinkDev.Talabat.Application
 {
@@ -32,6 +34,12 @@ namespace LinkDev.Talabat.Application
                 var _basketRepository = ServiceProvider.GetRequiredService<IBasketRepository>();
 
                 return () => new BasketService(_basketRepository, _configuration, _mapper);
+            });
+
+            services.AddScoped(typeof(IOrderService), typeof(OrderService));
+            services.AddScoped(typeof(Func<IOrderService>), (serviceProvider) =>
+            {
+                return () => serviceProvider.GetRequiredService<IOrderService>();
             });
             return services;
         }
