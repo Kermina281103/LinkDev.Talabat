@@ -29,5 +29,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBrand> Brands { get; set; }
         public DbSet<ProductCategory> Categories { get; set; }
+   
+       
     }
 }
