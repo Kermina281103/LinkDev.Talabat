@@ -2,9 +2,11 @@
 using LinkDev.Talabat.Application.Abstraction.Models;
 using LinkDev.Talabat.Application.Abstraction.Models.Basket;
 using LinkDev.Talabat.Application.Abstraction.Models.Employees;
+using LinkDev.Talabat.Application.Abstraction.Models.Orders;
 using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Domain.Entities.Basket;
 using LinkDev.Talabat.Domain.Entities.Employees;
+using LinkDev.Talabat.Domain.Entities.Orders;
 using LinkDev.Talabat.Domain.Entities.Products;
 
 namespace LinkDev.Talabat.Application.Mapping
@@ -28,6 +30,20 @@ namespace LinkDev.Talabat.Application.Mapping
                 .ForMember(d => d.Department, o => o.MapFrom(src => src.Department!.Name));
 
             CreateMap<Domain.Entities.Identity.Address, AddressDto>();
+
+            CreateMap<Order, OrderToReturnDto>()
+                .ForMember(dest => dest.DeliveryMethod, options => options.MapFrom(src => src.DeliveryMethod!.ShortName));
+
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(dest => dest.ProductId, options => options.MapFrom(src => src.Product.ProdutId))
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.ProductName))
+                .ForMember(dest => dest.PictureUrl, opt => opt.MapFrom<OrderItemPictureUrlResolver>());
+
+            CreateMap<Address, AddressDto>();
+            CreateMap<DeliveryMethod, DeliveryMethodDto>();
+
+
+
         
         }
     }
