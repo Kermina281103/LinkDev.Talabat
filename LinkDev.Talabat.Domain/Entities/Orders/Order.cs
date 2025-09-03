@@ -21,8 +21,9 @@ namespace LinkDev.Talabat.Domain.Entities.Orders
         public virtual ICollection<OrderItem> Items { get; set; } = new HashSet<OrderItem>();
 
         public decimal SubTotal { get; set; }
-        
-        public decimal GetTotal() => SubTotal + DeliveryMethod!.Cost;
+
+        public decimal GetTotal() => SubTotal + (DeliveryMethod?.Cost ?? 0);
+
         public string PaymentIndentId { get; set; } = "";
     }
 }
