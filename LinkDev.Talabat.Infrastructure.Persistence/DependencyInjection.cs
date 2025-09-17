@@ -1,17 +1,11 @@
-﻿using LinkDev.Talabat.Domain.Contract.Infrastructure;
-using LinkDev.Talabat.Domain.Contract.Persistence;
+﻿using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Contract.Persistence.DbInitializer;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
+using LinkDev.Talabat.Infrastructure.Persistence.Data.Interceptors;
 using LinkDev.Talabat.Infrastructure.Persistence.Identity;
-using LinkDev.Talabat.Infrastructure.Persistence.Identity.Migrations;
 using LinkDev.Talabat.Infrastructure.Persistence.UnitOfWorks;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Persistence
 {
@@ -21,13 +15,15 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
         {
             #region StoreInitializer 
 
-            services.AddDbContext<StoreDbContext>(optionBuilder =>
+            services.AddDbContext<StoreDbContext>((serviceProvider,optionBuilder) =>
           {
               optionBuilder
               .UseLazyLoadingProxies()
-              .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+              .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+              .AddInterceptors(serviceProvider.GetRequiredService<AuditInterCeptor>());
 
           });
+            services.AddScoped(typeof(AuditInterCeptor));
             services.AddScoped<IStoreDbInitializer, StoreContextInitializer>();
             #endregion
 
@@ -45,7 +41,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistence
             #endregion
 
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-          
+            services.AddScoped(typeof(ISaveChangesInterceptor), typeof(AuditInterCeptor));
             return services;
         }
     }

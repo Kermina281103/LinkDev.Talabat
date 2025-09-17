@@ -3,7 +3,9 @@ using LinkDev.Talabat.APIs.Controllers.Errors;
 using LinkDev.Talabat.APIs.Extensions;
 using LinkDev.Talabat.APIs.Extensions.IdentityExtensions;
 using LinkDev.Talabat.APIs.MiddleWares;
+using LinkDev.Talabat.APIs.Services;
 using LinkDev.Talabat.Application;
+using LinkDev.Talabat.Application.Abstraction;
 using LinkDev.Talabat.Domain.Contract.Persistence.DbInitializer;
 using LinkDev.Talabat.Domain.Entities.Identity;
 using LinkDev.Talabat.Infrastructure;
@@ -82,6 +84,8 @@ namespace LinkDev.Talabat.APIs
             // builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
             builder.Services.AddPersistenceService(builder.Configuration);
             builder.Services.AddApplicationServices();
            builder.Services.AddInfrastructureServices(builder.Configuration);
