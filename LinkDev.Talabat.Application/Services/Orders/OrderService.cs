@@ -3,21 +3,18 @@ using LinkDev.Talabat.Application.Abstraction.Models.Orders;
 using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
 using LinkDev.Talabat.Application.Abstraction.Services.Orders;
 using LinkDev.Talabat.Application.Exceptions;
+using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Entities.Orders;
 using LinkDev.Talabat.Domain.Entities.Products;
 using LinkDev.Talabat.Domain.Specifications.Orders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Application.Services.Orders
 {
     class OrderService(IBasketService basketService
         ,IUnitOfWork unitOfWork
-        ,IMapper mapper) : IOrderService
+        ,IMapper mapper
+        ,IPaymentService paymentService) : IOrderService
     {
         public async Task<OrderToReturnDto> CreateOrderAsync(string buyerEmail, OrderToCreateDto order)
         {
@@ -66,15 +63,27 @@ namespace LinkDev.Talabat.Application.Services.Orders
             var Address = mapper.Map<Address>(order.ShippingAddress);
             // 5.Deliver Method 
             var deliveryMethod = await unitOfWork.GetRepository<DeliveryMethod, int>().GetAsync(order.DeliveryMethodId);
+
+            var OrderRepo = unitOfWork.GetRepository<Order, int>();
+
+            var OrderSpec = new OrderByPaymentIndentSpecifications(basket.PaymentIntentId!);
+            var existOrder = await OrderRepo.GetWithSpecAsync(OrderSpec);
+            if(existOrder is not null)
+            {
+                OrderRepo.Delete(existOrder);
+                await paymentService.CreateOrUpdateIntent(basket.Id);
+            }
+            
             var orderToCreate = new Order()
             {
                 BuyerEmail = buyerEmail,
                 ShippingAddress = Address,
-                Items=orderItems,
-                SubTotal=subTotal,
-                DeliveryMethod= deliveryMethod
+                Items = orderItems,
+                SubTotal = subTotal,
+                DeliveryMethod = deliveryMethod,
+                PaymentIndentId = basket.PaymentIntentId!
             };
-            await unitOfWork.GetRepository<Order,int>().AddAsync(orderToCreate);
+            await OrderRepo.AddAsync(orderToCreate);
 
             //6.Save to DataBase
             var created = await unitOfWork.CompleteAsync() > 0;
