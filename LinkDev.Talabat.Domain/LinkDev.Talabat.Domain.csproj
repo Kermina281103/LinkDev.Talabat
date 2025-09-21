@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LinkDev.Talabat.APIs.Controllers\LinkDev.Talabat.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\LinkDev.Talabat.Shared\LinkDev.Talabat.Shared.csproj" />
   </ItemGroup>
 
 </Project>

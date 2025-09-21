@@ -12,6 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LinkDev.Talabat.Application.Abstraction\LinkDev.Talabat.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\LinkDev.Talabat.Domain\LinkDev.Talabat.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LinkDev.Talabat.Domain">
+      <HintPath>..\LinkDev.Talabat.Domain\bin\Debug\net9.0\LinkDev.Talabat.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

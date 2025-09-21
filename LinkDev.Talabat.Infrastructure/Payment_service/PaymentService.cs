@@ -1,26 +1,30 @@
-﻿using LinkDev.Talabat.Application.Exceptions;
+﻿using AutoMapper;
+using LinkDev.Talabat.Application.Exceptions;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using LinkDev.Talabat.Domain.Contract.Persistence;
-using LinkDev.Talabat.Domain.Entities.Basket;
 using LinkDev.Talabat.Domain.Entities.Orders;
 using LinkDev.Talabat.Shared.Models;
-using Microsoft.Extensions.Configuration;
+using LinkDev.Talabat.Shared.Models.Basket;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Stripe;
 using Product = LinkDev.Talabat.Domain.Entities.Products.Product;
 
 namespace LinkDev.Talabat.Infrastructure.Payment_service
 {
-    class PaymentService(IBasketRepository basketRepository,IUnitOfWork unitOfWork,IOptions<RedisSetting> redisSetting) : IPaymentService
+    class PaymentService(IBasketRepository basketRepository,
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        IOptions<RedisSetting> redisSetting,
+        IOptions<StripeSetting> stripeSetting) : IPaymentService
     {
         private readonly RedisSetting _redisSetting = redisSetting.Value;
-        public async  Task<Basket?> CreateOrUpdateIntent(string BasketId)
+        private readonly StripeSetting _stripeSetting = stripeSetting.Value;
+        public async  Task<BasketDto?> CreateOrUpdateIntent(string BasketId)
         {
-        
+            StripeConfiguration.ApiKey = _stripeSetting.Secretkey;
             var basket= await basketRepository.GetAsync(BasketId);  
             if (basket is null )
-                throw new NotFoundException(nameof(Basket), BasketId);
+                throw new NotFoundException(nameof(BasketDto), BasketId);
 
             if (basket.DeliveryMethodId.HasValue)
             {
@@ -38,6 +42,8 @@ namespace LinkDev.Talabat.Infrastructure.Payment_service
                 foreach (var item in basket.Items)
                 {
                     var Product = await ProductRepo.GetAsync(item.Id);
+                    if (Product == null)
+                        throw new NotFoundException(nameof(Product), item.Id);
 
                     if (item.Price != Product!.Price)
                         item.Price = Product.Price;
@@ -53,7 +59,7 @@ namespace LinkDev.Talabat.Infrastructure.Payment_service
                 {
                     Amount = (long)basket.Items.Sum(item => item.Price * 100 * item.Quantity) + (long)basket.shippingPrice * 100,
                     Currency="USD",
-                    PaymentMethodTypes= new List<string>() { "Card"}
+                    PaymentMethodTypes= new List<string>() { "card"}
                     
                 };
 
@@ -74,7 +80,7 @@ namespace LinkDev.Talabat.Infrastructure.Payment_service
             }
             await basketRepository.UpdateAsync(basket, TimeSpan.FromDays(_redisSetting.TimeToLive));
 
-            return basket;
+            return  mapper.Map<BasketDto>(basket);
 
 
         }

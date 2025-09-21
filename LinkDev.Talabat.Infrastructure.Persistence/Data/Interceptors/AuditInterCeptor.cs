@@ -1,4 +1,5 @@
-﻿using LinkDev.Talabat.Application.Abstraction;
+﻿
+using LinkDev.Talabat.Application.Abstraction;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;

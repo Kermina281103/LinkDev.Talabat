@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Models.Basket;
 using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
 using LinkDev.Talabat.Application.Exceptions;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
-using LinkDev.Talabat.Domain.Entities.Basket;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using LinkDev.Talabat.Domain.Entities.Baskets;
+using LinkDev.Talabat.Shared.Models.Basket;
 namespace LinkDev.Talabat.Application.Services.Baskets
 {
     public class BasketService : IBasketService
@@ -33,23 +27,22 @@ namespace LinkDev.Talabat.Application.Services.Baskets
         public async Task<BasketDto> GetCustomerBasketAsync(string id)
         {
             var basket = await _basketRepository.GetAsync(id);
-            if (basket is null) throw new NotFoundException(nameof(Basket), id);
+            if (basket is null) throw new NotFoundException(nameof(BasketDto), id);
 
-            var mappedBasket =  _mapper.Map<BasketDto>(basket);
+            var mappedBasket = _mapper.Map<BasketDto>(basket);
             return mappedBasket;
         }
 
         public async Task<BasketDto> UpdateCustomerBasketAsync(BasketDto basket)
         {
-            var updatedBasket = _mapper.Map<Basket>(basket);
+            var timeToLive = int.Parse(_configuration.GetSection("RedisSetting")["TimeToLive"]!);
 
-            var timeToLive = int.Parse( _configuration.GetSection("RedisSetting")["TimeToLive"]!);
-            var updated = await _basketRepository.UpdateAsync(updatedBasket,
-                                          TimeSpan.FromDays(timeToLive));
+            var updated = await _basketRepository.UpdateAsync(basket, TimeSpan.FromDays(timeToLive));
 
-            if (updated is null) throw new BadRequesException("An " +
-                "Error has occured , can't updated your basket , please try again ");
-            return basket;
+            if (updated is null)
+                throw new BadRequesException("An error has occurred, can't update your basket, please try again");
+
+            return updated; // This is now safe because we've checked for null above
         }
     }
 }

@@ -1,23 +1,19 @@
 ﻿using LinkDev.Talabat.APIs.Controllers.Base;
-using LinkDev.Talabat.Application.Abstraction.Models.Basket;
+
 using LinkDev.Talabat.Application.Abstraction.Services;
+using LinkDev.Talabat.Shared.Models.Basket;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.APIs.Controllers.Controllers.Baskets
 {
-   public class BasketController:BaseApiController
+    public class BasketController : BaseApiController
     {
         private readonly IServiceManager _serviceManager;
 
         public BasketController(IServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
-            
+
         }
 
         [HttpGet]//GET: base/api/basket?id=
@@ -30,9 +26,9 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Baskets
         public async Task<ActionResult<BasketDto>> UpdateBasket(BasketDto basketDto)
         {
 
-           return await _serviceManager.BasketService.UpdateCustomerBasketAsync(basketDto);
+            return await _serviceManager.BasketService.UpdateCustomerBasketAsync(basketDto);
 
-            
+
         }
         [HttpDelete]//Delete 
         public async Task<IActionResult> DeleteBasket(string id)

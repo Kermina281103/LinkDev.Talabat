@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Domain.Entities.Basket
+namespace LinkDev.Talabat.Domain.Entities.Baskets
 {
     public class Basket:BaseEntity<string>
     {

@@ -1,9 +1,11 @@
 ﻿using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using LinkDev.Talabat.Infrastructure.Basket_Repository;
+using LinkDev.Talabat.Infrastructure.Payment_service;
 using LinkDev.Talabat.Shared.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace LinkDev.Talabat.Infrastructure
     {
         public static  IServiceCollection AddInfrastructureServices(this IServiceCollection services,IConfiguration config)
         {
+            
             services.AddScoped(typeof(IConnectionMultiplexer), (serviceProvider) =>
             {
                 var connectionString = config.GetConnectionString("Redis");
@@ -25,7 +28,9 @@ namespace LinkDev.Talabat.Infrastructure
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
 
+            services.AddScoped(typeof(IPaymentService), typeof(PaymentService));
             services.Configure<RedisSetting>(config.GetSection("RedisSetting"));
+            services.Configure<StripeSetting>(config.GetSection("StripeStting"));
             return services;
         }
     }

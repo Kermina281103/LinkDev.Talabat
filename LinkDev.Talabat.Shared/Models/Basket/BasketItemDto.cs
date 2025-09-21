@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Domain.Entities.Basket
+namespace LinkDev.Talabat.Shared.Models.Basket
 {
-   public  class BasketItem:BaseEntity<int>
+    public record BasketItemDto
     {
-       
-        public required string ProductName { get; set; }
+        public int Id { get; set; }
+        public required string ProductName { get; set; } = string.Empty;
         public string? PictureUrl { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public string? Brand { get; set; }
+        public string?  Brand { get; set; }
         public string? Category { get; set; }
-
     }
 }

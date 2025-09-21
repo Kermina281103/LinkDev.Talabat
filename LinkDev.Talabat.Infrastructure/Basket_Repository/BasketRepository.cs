@@ -6,7 +6,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
-using LinkDev.Talabat.Domain.Entities.Basket;
+using LinkDev.Talabat.Domain.Entities.Baskets;
+using LinkDev.Talabat.Shared.Models.Basket;
 using StackExchange.Redis;
 
 namespace LinkDev.Talabat.Infrastructure.Basket_Repository
@@ -20,13 +21,13 @@ namespace LinkDev.Talabat.Infrastructure.Basket_Repository
         {
             _database = redis.GetDatabase();
         }
-        public async Task<Basket?> GetAsync(string id)
+        public async Task<BasketDto?> GetAsync(string id)
         {
             var basket = await _database.StringGetAsync(id);
-            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<Basket>(basket);
+            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<BasketDto>(basket);
         }
 
-        public async Task<Basket?> UpdateAsync(Basket basket, TimeSpan timeToLive)
+        public async Task<BasketDto?> UpdateAsync(BasketDto basket, TimeSpan timeToLive)
         {
             var serializedBasket = JsonSerializer.Serialize(basket);
             var updated = await _database.StringSetAsync(basket.Id,
