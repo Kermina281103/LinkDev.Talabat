@@ -85,6 +85,16 @@ namespace LinkDev.Talabat.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") // Your Angular URL
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+            });
             builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
             builder.Services.AddPersistenceService(builder.Configuration);
             builder.Services.AddApplicationServices();
@@ -116,6 +126,7 @@ namespace LinkDev.Talabat.APIs
                 app.UseHttpsRedirection();
                 app.UseStatusCodePagesWithReExecute("/Errors/{0}");
                 app.UseStaticFiles();
+                app.UseCors("AllowAngular");
                 app.UseAuthentication();
                 app.UseAuthorization();
                 app.MapControllers();

@@ -5,6 +5,8 @@ namespace LinkDev.Talabat.Domain.Contract.Infrastructure
 {
     public interface IPaymentService
     {
-        Task<BasketDto> CreateOrUpdateIntent(string BasketId);    
+        Task<BasketDto> CreateOrUpdateIntent(string BasketId);
+
+        public Task UpdateOrderPaymentStatus(string request, string header);
     }
 }

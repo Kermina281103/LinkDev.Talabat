@@ -3,10 +3,13 @@ using LinkDev.Talabat.Application.Exceptions;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Entities.Orders;
+using LinkDev.Talabat.Domain.Specifications.Orders;
 using LinkDev.Talabat.Shared.Models;
 using LinkDev.Talabat.Shared.Models.Basket;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Stripe;
+using Stripe.Forwarding;
 using Product = LinkDev.Talabat.Domain.Entities.Products.Product;
 
 namespace LinkDev.Talabat.Infrastructure.Payment_service
@@ -15,7 +18,9 @@ namespace LinkDev.Talabat.Infrastructure.Payment_service
         IUnitOfWork unitOfWork,
         IMapper mapper,
         IOptions<RedisSetting> redisSetting,
-        IOptions<StripeSetting> stripeSetting) : IPaymentService
+        IOptions<StripeSetting> stripeSetting,
+        IConfiguration configuration)
+             : IPaymentService
     {
         private readonly RedisSetting _redisSetting = redisSetting.Value;
         private readonly StripeSetting _stripeSetting = stripeSetting.Value;
@@ -83,6 +88,58 @@ namespace LinkDev.Talabat.Infrastructure.Payment_service
             return  mapper.Map<BasketDto>(basket);
 
 
+        }
+
+        public async Task UpdateOrderPaymentStatus(string request, string header)
+        {
+            var endPointSecret = configuration.GetSection("StripeStting")["EndPointSecret"];
+                var stripeEvent = EventUtility.ConstructEvent(request,
+                                   header, endPointSecret,throwOnApiVersionMismatch:false);
+
+            var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
+            // Handle the event
+            // If on SDK version < 46, use class Events instead of EventTypes
+            switch (stripeEvent.Type)
+            {
+                case EventTypes.PaymentIntentPaymentFailed:
+                    {
+                        await UpdatePaymentFailed(paymentIntent!.Id);
+                       
+                        break;
+                    }
+
+                case EventTypes.PaymentIntentSucceeded:
+                    {
+                        await UpdatePaymentSuccess(paymentIntent!.Id);
+                        break;
+                    }
+                // ... handle other event types
+                default:
+                    Console.WriteLine("Unhandled event type: {0}", stripeEvent.Type);
+                    break;
+            }
+
+
+        }
+
+        private async Task UpdatePaymentSuccess(string id)
+        {
+            var orderRepo = unitOfWork.GetRepository<Order, int>();
+            var order = await orderRepo.GetWithSpecAsync(new OrderByPaymentIndentSpecifications(id))??throw new Exception();
+
+            order.Status = OrderStatus.PaymentFailed;
+            orderRepo.Update(order);
+            await unitOfWork.CompleteAsync();
+        }
+
+        private async Task UpdatePaymentFailed(string id)
+        {
+            var orderRepo = unitOfWork.GetRepository<Order, int>();
+            var order = await orderRepo.GetWithSpecAsync(new OrderByPaymentIndentSpecifications(id)) ?? throw new Exception();
+
+            order.Status = OrderStatus.PaymentReceived;
+            orderRepo.Update(order);
+            await unitOfWork.CompleteAsync();
         }
     }
 }

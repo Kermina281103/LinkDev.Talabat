@@ -15,7 +15,7 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Products
 {
    public class ProductController(IServiceManager serviceManager):BaseApiController
     {
-       // [Authorize(AuthenticationSchemes ="Kermina")]
+      // [Authorize]
         [HttpGet]  //Get :/api/Product
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {

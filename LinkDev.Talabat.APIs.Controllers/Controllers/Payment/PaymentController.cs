@@ -1,21 +1,47 @@
 ﻿using LinkDev.Talabat.APIs.Controllers.Base;
-using LinkDev.Talabat.Application.Abstraction.Models.Basket;
+using LinkDev.Talabat.Shared.Models.Basket;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs.Controllers.Controllers.Payment
 {
-    [Authorize]
-    public class PaymentController(IPaymentService paymenetService) : BaseApiController
-    {
-        [HttpPost("{basketId}")]//Post : /api/payment/(basketId)
+    ///  [Authorize]
 
-        public async Task<ActionResult<BasketDto>> CreateOrUpatePaymentIntent(string basketId)
+    public class PaymentsController : BaseApiController
+    {
+        private readonly IPaymentService _paymentService;
+
+        public PaymentsController(IPaymentService paymentService)
         {
-            var result = await paymenetService.CreateOrUpdateIntent(basketId);
-            return Ok(result);
+            _paymentService = paymentService;
         }
 
+        [HttpPost("{basketId}")]
+        public async Task<ActionResult<BasketDto>> CreateOrUpdatePaymentIntent([FromRoute] string basketId)
+        {
+            var result = await _paymentService.CreateOrUpdateIntent(basketId);
+            if (result == null) return BadRequest("Problem with your basket");
+            return Ok(result);
+        }
+    
+
+
+      //const string endpointSecret = "whsec_...";
+
+        [HttpPost("WebHook")]
+        public async Task<IActionResult> WebHook()
+        {
+            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+
+            //var stripeEvent = EventUtility.ConstructEvent(json,
+            //    Request.Headers["Stripe-Signature"], endpointSecret);
+
+           await  _paymentService.UpdateOrderPaymentStatus(json, Request.Headers["Stripe-Signature"]);
+            return new EmptyResult();
+
+
+
+        }
     }
 }
