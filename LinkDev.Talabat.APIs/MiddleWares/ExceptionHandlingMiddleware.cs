@@ -1,6 +1,6 @@
 ﻿using Azure;
 using LinkDev.Talabat.APIs.Controllers.Errors;
-using LinkDev.Talabat.Application.Exceptions;
+using LinkDev.Talabat.Shared.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.Net;

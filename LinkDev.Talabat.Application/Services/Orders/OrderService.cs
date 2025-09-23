@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Models.Orders;
-using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
+using LinkDev.Talabat.Application.Abstraction.Common.Contracts.Baskets;
+using LinkDev.Talabat.Application.Abstraction.Common.Contracts.Infrastructure;
 using LinkDev.Talabat.Application.Abstraction.Services.Orders;
-using LinkDev.Talabat.Application.Exceptions;
-using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Entities.Orders;
 using LinkDev.Talabat.Domain.Entities.Products;
 using LinkDev.Talabat.Domain.Specifications.Orders;
+using LinkDev.Talabat.Shared.Exceptions;
+using LinkDev.Talabat.Shared.Models.Orders;
 
 namespace LinkDev.Talabat.Application.Services.Orders
 {

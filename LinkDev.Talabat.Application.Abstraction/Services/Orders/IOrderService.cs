@@ -1,4 +1,6 @@
-﻿using LinkDev.Talabat.Application.Abstraction.Models.Orders;
+﻿
+
+using LinkDev.Talabat.Shared.Models.Orders;
 
 namespace LinkDev.Talabat.Application.Abstraction.Services.Orders
 {

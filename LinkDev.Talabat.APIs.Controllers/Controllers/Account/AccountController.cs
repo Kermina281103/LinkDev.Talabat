@@ -1,7 +1,7 @@
 ﻿using LinkDev.Talabat.APIs.Controllers.Base;
-using LinkDev.Talabat.Application.Abstraction.Models;
-using LinkDev.Talabat.Application.Abstraction.Models.Auth;
 using LinkDev.Talabat.Application.Abstraction.Services;
+using LinkDev.Talabat.Shared.Models;
+using LinkDev.Talabat.Shared.Models.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

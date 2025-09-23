@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Models;
-using LinkDev.Talabat.Application.Abstraction.Models.Basket;
-using LinkDev.Talabat.Application.Abstraction.Models.Employees;
-using LinkDev.Talabat.Application.Abstraction.Models.Orders;
-using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Domain.Entities.Baskets;
 using LinkDev.Talabat.Domain.Entities.Employees;
 using LinkDev.Talabat.Domain.Entities.Orders;
 using LinkDev.Talabat.Domain.Entities.Products;
+using LinkDev.Talabat.Shared.Models;
+using LinkDev.Talabat.Shared.Models.Basket;
+using LinkDev.Talabat.Shared.Models.Employees;
+using LinkDev.Talabat.Shared.Models.Orders;
+using LinkDev.Talabat.Shared.Models.Products;
 
 namespace LinkDev.Talabat.Application.Mapping
 {

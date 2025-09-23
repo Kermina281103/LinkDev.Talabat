@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Models.Employees;
 using LinkDev.Talabat.Application.Abstraction.Services.Employees;
 using LinkDev.Talabat.Domain.Contract.Persistence;
 using LinkDev.Talabat.Domain.Entities.Employees;
 using LinkDev.Talabat.Domain.Specifications.Employees;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LinkDev.Talabat.Shared.Models.Employees;
 
 namespace LinkDev.Talabat.Application.Services.Employees
 {

@@ -1,5 +1,6 @@
-﻿using LinkDev.Talabat.Application.Abstraction.Models;
-using LinkDev.Talabat.Application.Abstraction.Models.Auth;
+﻿
+using LinkDev.Talabat.Shared.Models;
+using LinkDev.Talabat.Shared.Models.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;

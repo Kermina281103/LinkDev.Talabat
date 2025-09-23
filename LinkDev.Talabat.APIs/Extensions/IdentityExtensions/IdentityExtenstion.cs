@@ -1,8 +1,9 @@
-﻿using LinkDev.Talabat.Application.Abstraction.Models.Auth;
+﻿
 using LinkDev.Talabat.Application.Abstraction.Services.Auth;
 using LinkDev.Talabat.Application.Services.Auth;
 using LinkDev.Talabat.Domain.Entities.Identity;
 using LinkDev.Talabat.Infrastructure.Persistence.Identity;
+using LinkDev.Talabat.Shared.Models.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;

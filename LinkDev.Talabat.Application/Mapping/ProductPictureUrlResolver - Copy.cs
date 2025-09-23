@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Execution;
-using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Domain.Entities.Products;
+using LinkDev.Talabat.Shared.Models.Products;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

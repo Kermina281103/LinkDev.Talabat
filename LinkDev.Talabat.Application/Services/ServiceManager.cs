@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using LinkDev.Talabat.Application.Abstraction.Common.Contracts.Baskets;
 using LinkDev.Talabat.Application.Abstraction.Services;
 using LinkDev.Talabat.Application.Abstraction.Services.Auth;
-using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
 using LinkDev.Talabat.Application.Abstraction.Services.Employees;
 using LinkDev.Talabat.Application.Abstraction.Services.Orders;
 using LinkDev.Talabat.Application.Abstraction.Services.Products;
@@ -22,11 +22,11 @@ namespace LinkDev.Talabat.Application.Services
             private readonly IConfiguration _configuration;
             private readonly Lazy<IProductService> _productService;
             private readonly Lazy<IEmployeeService> _employeeService;
-            private readonly Lazy<IBasketService> _basketService;
+           
             private readonly Lazy<IAuthServices> _authService;
             private readonly Lazy<IOrderService> _orderService;
 
-            public ServiceManager(IUnitOfWork unitOfWork, IConfiguration configuration ,IMapper mapper,Func<IOrderService> orderService,Func<IBasketService> basketServiceFactory, Func<IAuthServices> authServiceFactor)
+            public ServiceManager(IUnitOfWork unitOfWork, IConfiguration configuration ,IMapper mapper,Func<IOrderService> orderService, Func<IAuthServices> authServiceFactor)
             {
                 _unitOfWork = unitOfWork;
                 _configuration = configuration;
@@ -35,7 +35,6 @@ namespace LinkDev.Talabat.Application.Services
                 _productService = new Lazy<IProductService>(() => new ProductService(_unitOfWork,_mapper));
                _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService (_unitOfWork,_mapper));
                 _orderService = new Lazy<IOrderService>(orderService, LazyThreadSafetyMode.ExecutionAndPublication);
-                _basketService = new Lazy<IBasketService>(basketServiceFactory,LazyThreadSafetyMode.ExecutionAndPublication);
                 _authService = new Lazy<IAuthServices>(authServiceFactor,LazyThreadSafetyMode.ExecutionAndPublication);
             }
 
@@ -59,7 +58,7 @@ namespace LinkDev.Talabat.Application.Services
             }
 
             public IOrderService OrderService => _orderService.Value;
-            public IBasketService BasketService => _basketService.Value;
+      
             public IAuthServices AuthService => _authService.Value;
         }
     }

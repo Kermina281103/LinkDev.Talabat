@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Models;
-using LinkDev.Talabat.Application.Abstraction.Models.Auth;
 using LinkDev.Talabat.Application.Abstraction.Services.Auth;
-using LinkDev.Talabat.Application.Exceptions;
 using LinkDev.Talabat.Application.Extensions;
 using LinkDev.Talabat.Domain.Entities.Identity;
+using LinkDev.Talabat.Shared.Exceptions;
+using LinkDev.Talabat.Shared.Models;
+using LinkDev.Talabat.Shared.Models.Auth;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

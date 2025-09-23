@@ -1,15 +1,7 @@
 ﻿using AutoMapper;
-using AutoMapper.Execution;
-using LinkDev.Talabat.Application.Abstraction.Models.Orders;
-using LinkDev.Talabat.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Domain.Entities.Orders;
-using LinkDev.Talabat.Domain.Entities.Products;
+using LinkDev.Talabat.Shared.Models.Orders;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Application.Mapping
 {

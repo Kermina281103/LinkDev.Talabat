@@ -1,5 +1,5 @@
 ﻿using LinkDev.Talabat.Application.Abstraction.Common;
-using LinkDev.Talabat.Application.Abstraction.Models.Products;
+using LinkDev.Talabat.Shared.Models.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using LinkDev.Talabat.Application.Abstraction.Services.Baskets;
-using LinkDev.Talabat.Application.Exceptions;
 using LinkDev.Talabat.Domain.Contract.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using LinkDev.Talabat.Domain.Entities.Baskets;
 using LinkDev.Talabat.Shared.Models.Basket;
+using LinkDev.Talabat.Application.Abstraction.Common.Contracts.Baskets;
+using LinkDev.Talabat.Shared.Exceptions;
 namespace LinkDev.Talabat.Application.Services.Baskets
 {
     public class BasketService : IBasketService
