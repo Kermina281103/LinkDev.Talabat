@@ -1,14 +1,17 @@
 ﻿using LinkDev.Talabat.APIs.Controllers.Base;
+using LinkDev.Talabat.APIs.Controllers.Filters;
 using LinkDev.Talabat.Application.Abstraction.Common;
 using LinkDev.Talabat.Application.Abstraction.Services;
 using LinkDev.Talabat.Shared.Models.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs.Controllers.Controllers.Products
 {
    public class ProductController(IServiceManager serviceManager):BaseApiController
     {
-      // [Authorize]
+        [Authorize]
+        [CachedAttribute(600)]
         [HttpGet]  //Get :/api/Product
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
